@@ -11,13 +11,16 @@ public class MaterialService {
     @Autowired
     private MaterialRepository materialRepo;
 
-    public boolean saveMaterial(Material material) {
-    try {
-        materialRepo.save(material);
-        return true; 
-    } catch (Exception e) {
-        e.printStackTrace(); 
-        return false;
+    public ResponseEntity<Object> saveMaterial(@RequestBody Material material) {
+        try {
+            boolean savedSuccessfully = materialService.saveMaterial(material);
+            if (savedSuccessfully) {
+                return ResponseEntity.ok().body("{\"status\": 200, \"message\": \"ok\"}");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Failed to save material\"}");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
+        }
     }
-}
 }
