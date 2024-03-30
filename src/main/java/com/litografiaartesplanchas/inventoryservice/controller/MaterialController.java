@@ -13,12 +13,12 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-@RequestMapping("/api/inventory")
+@RequestMapping("/api/v1/inventory")
 public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Object> saveMaterial(@RequestBody Material material) {
         try {
             materialService.saveMaterial(material);

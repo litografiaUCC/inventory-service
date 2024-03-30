@@ -11,7 +11,13 @@ public class MaterialService {
     @Autowired
     private MaterialRepository materialRepo;
 
-    public void saveMaterial(Material material){
+    public boolean saveMaterial(Material material) {
+    try {
         materialRepo.save(material);
+        return true; 
+    } catch (Exception e) {
+        e.printStackTrace(); 
+        return false;
     }
+}
 }
