@@ -1,0 +1,17 @@
+[33mcommit 3ff52b7bd44e5bced85ed46abe6e8d79f28854a1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mLAP-135[m[33m, [m[1;31minventory-service/LAP-135[m[33m)[m
+Author: Juan Sebastian Cano <113861725+Juan-SCV@users.noreply.github.com>
+Date:   Fri Mar 29 18:01:47 2024 -0500
+
+    Delete inventory-service directory
+
+[33mcommit c401fb5e869abba96d76e9140bb5a1c0e2b015e5[m
+Author: Juan Sebastian Cano <113861725+Juan-SCV@users.noreply.github.com>
+Date:   Fri Mar 29 18:00:33 2024 -0500
+
+    Add files via upload
+
+[33mcommit 75a21d58d84fc3b0e8ef67286d9faee6385988f3[m[33m ([m[1;31minventory-service/main[m[33m)[m
+Author: Juan Sebastian <juan.sebastianri28@gmail.com>
+Date:   Mon Mar 4 21:14:04 2024 -0500
+
+    Initial commit
