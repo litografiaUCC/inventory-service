@@ -1,5 +1,7 @@
 package com.litografiaartesplanchas.inventoryservice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,10 @@ public class MaterialService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
         }
     }
+
+    public List<Material> getAll(){
+		return materialRepo.findAll();
+    }
 }
+
+
