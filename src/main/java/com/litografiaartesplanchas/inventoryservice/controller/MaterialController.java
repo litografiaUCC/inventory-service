@@ -2,6 +2,8 @@ package com.litografiaartesplanchas.inventoryservice.controller;
 
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,14 +24,20 @@ public class MaterialController {
 
     @PostMapping("/save")
     public ResponseEntity<Object> saveMaterial(@RequestBody Material material) {
-        try {
-            ResponseEntity<Object> saveResult = materialService.saveMaterial(material); 
-            return saveResult;
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
-        }
+    try {
+        materialService.saveMaterial(material);
+        
+        return ResponseEntity.ok().body("{\"status\": 200, \"message\": \"Material saved successfully\"}");
+        
+    } catch (RuntimeErrorException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"status\": 409, \"message\": \"Material already exists\"}");
+        
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400,\"message\": \"Something Went Wrong\"}");
     }
+}
+
+
 
     @GetMapping("/")
     public ResponseEntity<?> getAll(){
