@@ -28,17 +28,19 @@ public class MaterialController {
     private MaterialService materialService;
 
     @PostMapping("/save")
-    public ResponseEntity<Object> saveMaterials(@RequestBody List<Material> materials) {
+    public ResponseEntity<Object> saveMaterial(@RequestBody Material material) {
         try {
-            for (Material material : materials) {
-                materialService.saveMaterial(material);
-            }
-            return ResponseEntity.ok().body("{\"status\": 200, \"message\": \"Materials saved successfully\"}");
+            materialService.saveMaterial(material);
+            
+            return ResponseEntity.ok().body("{\"status\": 200, \"message\": \"Material saved successfully\"}");
+            
+        } catch (RuntimeErrorException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"status\": 409, \"message\": \"Material already exists\"}");
+            
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400,\"message\": \"Something Went Wrong\"}");
         }
     }
-
 
     @GetMapping("/")
     public ResponseEntity<?> getAll(){
