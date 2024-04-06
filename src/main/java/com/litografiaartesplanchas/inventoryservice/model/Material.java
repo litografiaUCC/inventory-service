@@ -63,7 +63,7 @@ public class Material {
 		this.quantity = quantity;
 	}
 
-	public TypeMaterial getMaterial() {
+	public TypeMaterial getTypeMaterial() {
 		return typeMaterial;
 	}
 

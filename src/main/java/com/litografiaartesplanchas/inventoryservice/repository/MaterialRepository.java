@@ -8,6 +8,8 @@ import com.litografiaartesplanchas.inventoryservice.model.Material;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material, Integer> {
 
-    boolean existByName(String name);
+    boolean existsByName(String name);
+
+    boolean existsById(Integer id);
 
 }
