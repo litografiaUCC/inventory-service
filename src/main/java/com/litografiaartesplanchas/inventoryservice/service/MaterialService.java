@@ -17,7 +17,7 @@ public class MaterialService {
 
     public void saveMaterial(Material material) {
         String materialName = material.getName();
-        if (materialRepo.existByName(material.getName())) {
+        if (materialRepo.existsByName(material.getName())) {
             throw new RuntimeErrorException(new Error("Material '" + materialName + "' already exists"));
         } 
 
@@ -29,6 +29,10 @@ public class MaterialService {
     }
 
     public void deleteMaterialById(Integer id) {
+        if (!materialRepo.existsById(id)) {
+            throw new RuntimeErrorException(new Error("Material doesn't exist"));
+        }
+
         materialRepo.deleteById(id);
     }
 
