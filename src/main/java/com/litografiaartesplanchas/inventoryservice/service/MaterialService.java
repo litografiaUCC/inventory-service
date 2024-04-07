@@ -1,6 +1,7 @@
 package com.litografiaartesplanchas.inventoryservice.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
 
@@ -34,6 +35,13 @@ public class MaterialService {
         }
 
         materialRepo.deleteById(id);
+    }
+
+    public Optional<Material> getMaterialById (Integer id) {
+        if (!materialRepo.existsById(id)) {
+            throw new RuntimeErrorException(new Error("Material doesn't exist"));
+        }
+        return materialRepo.findById(id);
     }
 
 }
