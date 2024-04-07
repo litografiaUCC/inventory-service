@@ -70,5 +70,4 @@ public class Material {
 	public void setTypeMaterial(TypeMaterial typeMaterial) {
 		this.typeMaterial = typeMaterial;
 	}
-	
 }

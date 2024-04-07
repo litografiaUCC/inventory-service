@@ -84,4 +84,17 @@ public class MaterialController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
         }
     }
+
+    @GetMapping("/type/{name}")
+    public ResponseEntity<Object> getMaterialsByType(@PathVariable String name) {
+        try {
+            List<Material> materials = materialService.getMaterialsByType(name);
+            if (materials.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok().body(materials);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400,\"message\": \"Something Went Wrong\"}");
+        }
+    }
 }
