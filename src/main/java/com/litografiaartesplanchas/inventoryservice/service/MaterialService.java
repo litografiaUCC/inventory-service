@@ -41,4 +41,7 @@ public class MaterialService {
         return materialRepo.findById(id);
     }
 
-}
+    public List<Material> getMaterialsByType(String name) {
+        return materialRepo.findByTypeMaterialName(name);
+    }
+}  
