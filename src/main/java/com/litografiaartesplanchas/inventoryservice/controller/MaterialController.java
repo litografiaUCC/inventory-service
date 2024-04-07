@@ -75,10 +75,12 @@ public class MaterialController {
             Optional<Material> material = materialService.getMaterialById(id);
             if (material.isPresent()) {
                 return ResponseEntity.ok().body(material.get());
-            } else {
+
+            }else{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": 404, \"message\": \"Material Not Found\"}");
             }
-        } catch (RuntimeErrorException e) {
+         
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
         }
     }

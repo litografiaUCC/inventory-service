@@ -38,9 +38,6 @@ public class MaterialService {
     }
 
     public Optional<Material> getMaterialById (Integer id) {
-        if (!materialRepo.existsById(id)) {
-            throw new RuntimeErrorException(new Error("Material doesn't exist"));
-        }
         return materialRepo.findById(id);
     }
 
