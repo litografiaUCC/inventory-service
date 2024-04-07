@@ -1,6 +1,7 @@
 package com.litografiaartesplanchas.inventoryservice.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
 
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.litografiaartesplanchas.inventoryservice.model.Material;
 import com.litografiaartesplanchas.inventoryservice.service.MaterialService;
 
-import jakarta.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +55,6 @@ public class MaterialController {
         }
     }
 
-    @Transactional
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Object> deleteMaterialById(@PathVariable Integer id) {
         try {
@@ -65,6 +64,22 @@ public class MaterialController {
         } catch (RuntimeErrorException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": 404, \"message\": \"Material Not Found\"}");
 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getMaterialById(@PathVariable Integer id) {
+        try {
+            Optional<Material> material = materialService.getMaterialById(id);
+            if (material.isPresent()) {
+                return ResponseEntity.ok().body(material.get());
+
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": 404, \"message\": \"Material Not Found\"}");
+            }
+         
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
         }
