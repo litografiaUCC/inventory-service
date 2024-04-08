@@ -44,4 +44,17 @@ public class MaterialService {
     public List<Material> getMaterialsByType(String name) {
         return materialRepo.findByTypeMaterialName(name);
     }
+
+    public void updateMaterialQuantity(Integer id, int quantity) {
+        Optional<Material> optionalMaterial = materialRepo.findById(id);
+        
+        if (optionalMaterial.isPresent()) {
+            Material material = optionalMaterial.get();
+            material.setQuantity(quantity);
+
+            materialRepo.save(material);
+        } else {
+            throw new IllegalArgumentException("Material doesn't exist");
+        }
+    }
 }  
