@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/api/v1/inventory")
@@ -99,7 +101,7 @@ public class MaterialController {
         }
     }
 
-    @PatchMapping("/{id}/update")
+    @PatchMapping("/{id}/quantityUpdate")
     public ResponseEntity<Object> updateMaterialQuantity(@PathVariable Integer id, @RequestParam int quantity) {
         try {
             materialService.updateMaterialQuantity(id, quantity);
@@ -107,7 +109,18 @@ public class MaterialController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": 404, \"message\": \"Material Not Found\"}");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
+        }
+    }
+
+    @PutMapping("/{id}/materialUpdate")
+    public ResponseEntity<?>  updateMaterial(@PathVariable Integer id, @RequestBody Material material) {
+        try {
+            materialService.updateMaterial(material);
+            return ResponseEntity.ok().body("{\"status\": 200, \"message\": \"Material updated successfully\"}");
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\": 404, \"message\": \"Material Not Found\"}");
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": 400, \"message\": \"Something Went Wrong\"}");
         }
     }
