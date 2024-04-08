@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.litografiaartesplanchas.inventoryservice.model.Material;
 import com.litografiaartesplanchas.inventoryservice.service.MaterialService;
-import com.litografiaartesplanchas.inventoryservice.controller.IRequestUpdateQuantity;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;

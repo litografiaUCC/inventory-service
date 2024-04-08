@@ -54,7 +54,7 @@ public class MaterialService {
 
             materialRepo.save(material);
         } else {
-            throw new IllegalArgumentException("Material doesn´t exist");
+            throw new IllegalArgumentException("Material doesn't exist");
         }
     }
 }  
