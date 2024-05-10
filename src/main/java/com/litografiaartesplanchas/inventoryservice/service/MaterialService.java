@@ -49,6 +49,10 @@ public class MaterialService {
     public List<Material> getMaterialsByType(String name) {
         return materialRepo.findByTypeMaterialName(name);
     }
+    
+    public List<TypeMaterial> getTypesMaterial(){
+    	return typeMaterialRepo.findAll();
+    }
 
     public void updateMaterialQuantity(Integer id, int quantity) {
         Optional<Material> optionalMaterial = materialRepo.findById(id);
