@@ -23,10 +23,17 @@ public class MaterialService {
 
     public void saveMaterial(Material material) {
         String materialName = material.getName();
+        
         if (materialRepo.existsByName(material.getName())) {
             throw new RuntimeErrorException(new Error("Material '" + materialName + "' already exists"));
         } 
 
+        Optional<TypeMaterial> typeMaterial = typeMaterialRepo.findById(material.getTypeMaterial().getId());
+        
+        if(!typeMaterial.isEmpty()) {
+        	material.setTypeMaterial(typeMaterial.get());
+        }
+        
         materialRepo.save(material);
     }
 
